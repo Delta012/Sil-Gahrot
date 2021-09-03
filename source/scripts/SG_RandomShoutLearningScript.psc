@@ -3,8 +3,12 @@ Scriptname SG_RandomShoutLearningScript extends ReferenceAlias
 FormList Property SG_ShoutsListPrefilled Auto
 FormList Property SG_ShoutsList Auto
 FormList Property SG_ShoutsWWGlobalList Auto
+
+GlobalVariable Property SG_MinChanceGlobal Auto
+
 Shout Property FireBreath Auto
 Shout Property WhirlwindSprint Auto
+
 WordOfPower Property WordFus Auto
 
 Event OnInit()
@@ -52,7 +56,7 @@ EndEvent
 Event OnTrackedStatsEvent(String asStatFilter, Int aiStatValue)
 
 	If Game.IsWordUnlocked(WordFus)
-		If (asStatFilter == "Dragon Souls Collected") && Utility.RandomInt(0,100) > 50
+		If (asStatFilter == "Dragon Souls Collected") && Utility.RandomInt(1,100) <= (SG_MinChanceGlobal.GetValueInt())
 		Int ListLength = SG_ShoutsList.GetSize()
 		Int RandIndex = Utility.RandomInt(0, ListLength - 1)
 		Shout S = SG_ShoutsList.GetAt(RandIndex) as Shout

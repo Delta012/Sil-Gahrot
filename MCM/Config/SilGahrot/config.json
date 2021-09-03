@@ -1,0 +1,22 @@
+{
+  "modName": "SilGahrot",
+  "displayName": "Sil Gahrot",
+  "pages": [
+    {
+      "pageDisplayName": "Settings",
+      "content": [
+        {
+          "id": "iWord:MinChance",
+          "text": "Word of Power Chance",
+          "type": "slider",
+          "valueOptions": {
+			"sourceType": "ModSettingInt",
+            "min": 1,
+            "max": 100,
+            "step": 1
+          }
+        }
+      ]
+    }
+  ]
+}
