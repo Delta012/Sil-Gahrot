@@ -22,21 +22,24 @@ Event OnInit()
 
 	RegisterForTrackedStatsEvent()
 	
+	Int ForcefulTongueIndex = Game.GetModByName("ForcefulTongue.esp")
+	Int WyrmstoothIndex = Game.GetModByName("Wyrmstooth.esp")
+	
 	Int N = SG_ShoutsListPrefilled.GetSize()
 	While N > 0
     N -= 1
     Form F = SG_ShoutsListPrefilled.GetAt(N)
     SG_ShoutsList.AddForm(F)
-		If Game.IsPluginInstalled("ForcefulTongue.esp") == 1.0
-		Shout PhantomForm = Game.GetFormFromFile(0xC26, "Forceful Tongue.esp") as Shout
-		SG_ShoutsListPrefilled.AddForm(PhantomForm)
-		SG_ShoutsList.AddForm(PhantomForm)
-		SG_ShoutsWWGlobalList.AddForm(WWPhantomForm)
-		elseIf Game.IsPluginInstalled("Wyrmstooth.esp") == 1.0
-		Shout PhantomFormWyrm = Game.GetFormFromFile(0x30C92F, "Wyrmstooth.esp") as Shout
-		SG_ShoutsListPrefilled.AddForm(PhantomFormWyrm)
-		SG_ShoutsList.AddForm(PhantomFormWyrm)
-		SG_ShoutsWWGlobalList.AddForm(WWPhantomForm)		
+		If ForcefulTongueIndex != 255
+			Shout PhantomForm = Game.GetFormFromFile(0xC26, "ForcefulTongue.esp") as Shout
+			SG_ShoutsListPrefilled.AddForm(PhantomForm)
+			SG_ShoutsList.AddForm(PhantomForm)
+			SG_ShoutsWWGlobalList.AddForm(WWPhantomForm)
+		elseIf WyrmstoothIndex != 255
+			Shout PhantomFormWyrm = Game.GetFormFromFile(0x30C92F, "Wyrmstooth.esp") as Shout
+			SG_ShoutsListPrefilled.AddForm(PhantomFormWyrm)
+			SG_ShoutsList.AddForm(PhantomFormWyrm)
+			SG_ShoutsWWGlobalList.AddForm(WWPhantomForm)		
 		endIf
 	endWhile
 	
@@ -46,8 +49,11 @@ Event OnPlayerLoadGame()
 
     RegisterForTrackedStatsEvent()
 	
-	If Game.IsPluginInstalled("ForcefulTongue.esp") == 1.0
-	Shout PhantomForm = Game.GetFormFromFile(0xC26, "Forceful Tongue.esp") as Shout
+	Int ForcefulTongueIndex = Game.GetModByName("ForcefulTongue.esp")
+	Int WyrmstoothIndex = Game.GetModByName("Wyrmstooth.esp")
+	
+	If ForcefulTongueIndex != 255	
+	Shout PhantomForm = Game.GetFormFromFile(0xC26, "ForcefulTongue.esp") as Shout
 		If SG_ShoutsList.HasForm(PhantomForm)
 			Return
 		else 
@@ -55,7 +61,7 @@ Event OnPlayerLoadGame()
 			SG_ShoutsList.AddForm(PhantomForm)
 			SG_ShoutsWWGlobalList.AddForm(WWPhantomForm)
 		endIf
-	elseIf Game.IsPluginInstalled("Wyrmstooth.esp") == 1.0
+	elseIf WyrmstoothIndex != 255
 	Shout PhantomFormWyrm = Game.GetFormFromFile(0x30C92F, "Wyrmstooth.esp") as Shout
 		If SG_ShoutsList.HasForm(PhantomFormWyrm)
 			Return
